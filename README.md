@@ -22,7 +22,7 @@ There are several ways to run a Spring Boot application on your local machine. O
 ## Postman tes
 
 
-![Get All User in postman](GetAll.png.png)
+![Get All User in postman](GetAll.png)
 
 
 
