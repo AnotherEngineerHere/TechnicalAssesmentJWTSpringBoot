@@ -19,7 +19,7 @@ spring.datasource.password="your password"
 
 There are several ways to run a Spring Boot application on your local machine. One way is to execute the `main` method in the `com.example.springjwt.SpringBootSecurityJwtApplication` class from your IDE.
 
-## Postman tes
+## Postman test
 
 
 ![Get All User in postman](GetAll.png)
