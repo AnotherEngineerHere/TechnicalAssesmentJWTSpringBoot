@@ -19,22 +19,14 @@ spring.datasource.password="your password"
 
 There are several ways to run a Spring Boot application on your local machine. One way is to execute the `main` method in the `com.example.springjwt.SpringBootSecurityJwtApplication` class from your IDE.
 
-## Postman configuration
-
-for access to the authentication you must provide a valid mobile_phone and a valid password
-
-the route for accessing the application will be auth 
-
-```
-http://localhost:8080/auth/getAll
+## Postman tes
 
 
-```
+![Get All User in postman](GetAll.png.png)
 
- for get all users
+
 
 For login the route will be
 
-```
-![Login in postman](image.png)
-```
+![Login in postman](Login.png)
+
