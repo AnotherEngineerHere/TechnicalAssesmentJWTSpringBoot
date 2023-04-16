@@ -79,6 +79,11 @@ public class UserController {
 		}
 		@PostMapping("/create")
 		  public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
+		    if (userRepository.existsByMobilePhone(signUpRequest.getMobile_phone())) {
+		        return ResponseEntity
+		            .badRequest()
+		            .body(new MessageResponse("Error: Mobile Phone is already taken!"));
+		      }
 		    User user = new User(signUpRequest.getNombre(), 
 		               signUpRequest.getApellido(),
 		               signUpRequest.getFechaDeNacimiento(),
