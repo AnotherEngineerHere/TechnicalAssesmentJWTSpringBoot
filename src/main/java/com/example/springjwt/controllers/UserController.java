@@ -50,6 +50,7 @@ public class UserController {
 		        userToUpdate.setNombre(usuario.getNombre());
 		        userToUpdate.setApellido(usuario.getApellido());
 		        userToUpdate.setDireccion(usuario.getDireccion());
+		        userToUpdate.setFechaDeNacimiento(usuario.getFechaDeNacimiento());
 		        userToUpdate.setCorreo(usuario.getCorreo());
 
 		        if (usuario.getPassword() != null && !usuario.getPassword().isEmpty()) {
@@ -69,13 +70,10 @@ public class UserController {
 		    }
 		}
 
-
-
-		
 		@DeleteMapping(value = "delete/{id}")
-		private ResponseEntity<Boolean> deleteUsuario(@PathVariable("id") Long id) {
+		private ResponseEntity<MessageResponse> deleteUsuario(@PathVariable("id") Long id) {
 		    userRepository.deleteById(id);
-		    return ResponseEntity.ok().build();
+		    return ResponseEntity.ok(new MessageResponse("User deleted successfully!"));
 		}
 		@PostMapping("/create")
 		  public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
