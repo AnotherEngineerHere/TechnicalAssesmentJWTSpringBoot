@@ -58,11 +58,10 @@ public class User {
 	@Column(name = "password")
 	@Getter
 	@Setter
-	@JsonIgnore
 	private String password;
 	
 	@NotBlank
-	@Column(name = "mobilePhone")
+	@Column(name = "mobilePhone", unique = true)
 	@Getter
 	@Setter
 	private String mobilePhone;

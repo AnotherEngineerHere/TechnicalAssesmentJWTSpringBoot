@@ -30,7 +30,7 @@ import com.example.springjwt.repository.UserRepository;
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/usuarios/")
-public class TestController {
+public class UserController {
 	  @Autowired
 	  UserRepository userRepository;
 	  
@@ -43,18 +43,33 @@ public class TestController {
 			return ResponseEntity.ok(userRepository.findById(id));
 		}
 		
-		@PutMapping("/{id}")
+		@PutMapping("update/{id}")
 		public ResponseEntity<MessageResponse> updatePersona(@PathVariable Long id, @RequestBody User usuario) {
 		    try {
-		        usuario.setId(id);
-		        userRepository.saveAndFlush(usuario);
+		        User userToUpdate = userRepository.findById(id).orElseThrow();
+		        userToUpdate.setNombre(usuario.getNombre());
+		        userToUpdate.setApellido(usuario.getApellido());
+		        userToUpdate.setDireccion(usuario.getDireccion());
+		        userToUpdate.setCorreo(usuario.getCorreo());
+
+		        if (usuario.getPassword() != null && !usuario.getPassword().isEmpty()) {
+		            String encodedPassword = encoder.encode(usuario.getPassword());
+		            userToUpdate.setPassword(encodedPassword);
+		        }
+
+		        // Guarda los cambios en la base de datos
+		        userRepository.saveAndFlush(userToUpdate);
+
 		        return ResponseEntity.ok(new MessageResponse("Usuario actualizado correctamente."));
 		    } catch (NoSuchElementException e) {
 		        return ResponseEntity.notFound().build();
 		    } catch (Exception e) {
+		        e.printStackTrace();
 		        return ResponseEntity.badRequest().body(new MessageResponse("Error al actualizar el usuario."));
 		    }
 		}
+
+
 
 		
 		@DeleteMapping(value = "delete/{id}")
@@ -62,6 +77,20 @@ public class TestController {
 		    userRepository.deleteById(id);
 		    return ResponseEntity.ok().build();
 		}
+		@PostMapping("/create")
+		  public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
+		    User user = new User(signUpRequest.getNombre(), 
+		               signUpRequest.getApellido(),
+		               signUpRequest.getFechaDeNacimiento(),
+		               signUpRequest.getDireccion(),
+		               encoder.encode(signUpRequest.getPassword()),
+		            		   signUpRequest.getMobile_phone(),
+		            		   signUpRequest.getCorreo()
+		    	               );
+
+		    userRepository.save(user);
+		    return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+		  }
 	 
 
 }

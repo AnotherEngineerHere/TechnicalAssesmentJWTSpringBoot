@@ -15,7 +15,8 @@ import com.example.springjwt.repository.UserRepository;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
-  @Autowired
+  
+@Autowired
   UserRepository userRepository;
 
   @Override

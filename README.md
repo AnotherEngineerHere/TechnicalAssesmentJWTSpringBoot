@@ -21,12 +21,12 @@ There are several ways to run a Spring Boot application on your local machine. O
 
 ## Postman test
 
-
 ![Get All User in postman](GetAll.png)
-
-
 
 For login the route will be
 
 ![Login in postman](Login.png)
 
+Login credentials are
+
+![Login credentials](Login.png)

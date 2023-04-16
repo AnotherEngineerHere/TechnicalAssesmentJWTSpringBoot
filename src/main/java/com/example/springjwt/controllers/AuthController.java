@@ -35,7 +35,7 @@ import com.example.springjwt.security.services.UserDetailsImpl;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/auth/")
+@RequestMapping("/auth")
 public class AuthController {
   @Autowired
   AuthenticationManager authenticationManager;
@@ -66,6 +66,7 @@ public class AuthController {
 	private ResponseEntity<List<User>> getAllUsers(){
 		return ResponseEntity.ok(userRepository.findAll());
 	}
+
   
 
  
